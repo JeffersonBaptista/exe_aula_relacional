@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jefferson Games</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_usuario.css}">
+
+
+</head>
+
+<body>
+    <div>
+        <div class="menu">
+            <nav>
+                <ul class="lista">
+                    <li> <a class="menu" href="/cadastrar">Cadastrar</a> </li>
+
+                </ul>
+            </nav>
+        </div>
+
+        <div>
+            <h1>Lista de Usuarios</h1>
+
+
+            <div class="user" th:each="usuario : ${usuarios}">
+                <h2 th:text="'Nome: '+${usuario.nome}"></h2>
+                <p th:text="'SobreNome: '+${usuario.sobreNome}"></p>
+                <p th:text="'Email: '+${usuario.email}"></p>
+                <p th:text="'Apelido: '+${usuario.login.apelido}"></p>
+                <p th:text="'Senha: '+${usuario.login.senha}"></p>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

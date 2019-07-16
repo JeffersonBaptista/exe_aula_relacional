@@ -28,18 +28,26 @@ public class UsuarioController {
 	LoginService loginService;
 
 	@GetMapping("/")
-	public ModelAndView mapiarPagina() {
+	public ModelAndView mapiarHome() {
+		ModelAndView modelAndView = new ModelAndView("home.html");
+		modelAndView.addObject("usuarios", usuarioService.exibirUsuarios());
+		return modelAndView;
+	}
+	
+	@GetMapping("/cadastrar")
+	public ModelAndView mapiarCadastro() {
 		ModelAndView modelAndView = new ModelAndView("cadastro.html");
 		modelAndView.addObject("usuarios", usuarioService.exibirUsuarios());
 		return modelAndView;
 	}
 
-	@PostMapping("/")
+	@PostMapping("/cadastrar")
 	public ModelAndView cadastrarUsuario(@Valid UsuarioModel usuario, BindingResult bindngUsuario,
 			@Valid LoginModel login, BindingResult bindngLogin) {
-		ModelAndView modelAndView = new ModelAndView("cadastro.html");
 
 		List<String> mensagens = new ArrayList<String>();
+
+		ModelAndView modelAndView = new ModelAndView("cadastro.html");
 
 		if (bindngUsuario.hasErrors() || bindngLogin.hasErrors()) {
 			List<String> erros = new ArrayList<String>();
@@ -56,10 +64,7 @@ public class UsuarioController {
 
 			mensagens.add("Cadastrado com sucesso");
 			modelAndView.addObject("mensagens", mensagens);
-			//modelAndView.addObject("usuarios", usuarioService.exibirUsuarios());
 		}
-
-		
 
 		return modelAndView;
 
